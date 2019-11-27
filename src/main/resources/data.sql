@@ -1,0 +1,56 @@
+-- DROP TABLE IF EXISTS movies;
+-- DROP TABLE IF EXISTS actors;
+-- DROP TABLE IF EXISTS directors;
+--
+-- CREATE TABLE actors
+-- (
+--     actor_id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     actor_name VARCHAR(50) NOT NULL,
+--     experience DOUBLE      NOT NULL
+-- );
+--
+-- CREATE TABLE directors
+-- (
+--     director_id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     director_name VARCHAR(50) NOT NULL
+-- );
+--
+-- CREATE TABLE movies
+-- (
+--     movie_id           BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     movie_name   VARCHAR(50)   NOT NULL,
+--     release_date TIMESTAMP     NOT NULL,
+--     actor_id     BIGINT UNIQUE NOT NULL,
+--     director_id  BIGINT        NOT NULL,
+--     FOREIGN KEY (director_id) REFERENCES directors (director_id),
+--     FOREIGN KEY (actor_id) REFERENCES actors (actor_id)
+-- );
+
+-- INSERT INTO directors(director_name)
+-- VALUES ('edik'),
+--        ('ivan'),
+--        ('shoni'),
+--        ('mark');
+--
+-- INSERT INTO actors(actor_name, experience)
+-- VALUES ('Leonardo Dicaprio1', 1),
+--        ('Leonardo Dicaprio2', 1),
+--        ('Leonardo Dicaprio3', 1),
+--        ('Leonardo Dicaprio4', 1),
+--        ('Leonardo Dicaprio5', 1),
+--        ('Leonardo Dicaprio6', 1),
+--        ('Leonardo Dicaprio7', 1),
+--        ('Leonardo Dicaprio8', 1),
+--        ('Leonardo Dicaprio9', 1);
+--
+-- INSERT INTO movies(movie_name, release_date, actor_id, director_id)
+-- VALUES ('Gost Basters1', '2012-11-01 12:08:17.320053-03', 1, 1),
+--        ('Gost Basters2', '2013-07-24 12:08:17.320053-03', 2, 1),
+--        ('Gost Basters3', '2014-04-22 12:08:17.320053-03', 3, 2),
+--        ('Gost Basters4', '2015-01-15 12:08:17.320053-03', 4, 2),
+--        ('Gost Basters5', '2016-02-14 12:08:17.320053-03', 5, 2),
+--        ('Gost Basters6', '2013-01-20 12:08:17.320053-03', 6, 3),
+--        ('Gost Basters7', '2010-03-03 12:08:17.320053-03', 7, 3),
+--        ('Gost Basters8', '2009-06-13 12:08:17.320053-03', 8, 3),
+--        ('Gost Basters9', '2006-11-11 12:08:17.320053-03', 9, 3);
+//SELECT movie_name, release_date, actor_name FROM directors d JOIN movies m ON d.id = m.director_id JOIN actors a ON a.id = m.actor_id WHERE d.id = 1
