@@ -1,27 +1,24 @@
 package com.efotul.movie.movieapi.entity;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "ACTORS")
+@Table(name = "actor")
 @Data
 public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long actorId;
+    private Long id;
 
-    @Column(name = "actor_name")
-    @NonNull
     private String actorName;
 
-    @Column(name = "experience")
-    @NonNull
     private Double experience;
 
-    @OneToOne(mappedBy = "actor")
-    private Movie movie;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "movie_actor")
+    private List<Movie> movies;
 }

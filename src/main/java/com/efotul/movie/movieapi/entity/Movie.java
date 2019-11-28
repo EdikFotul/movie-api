@@ -1,35 +1,28 @@
 package com.efotul.movie.movieapi.entity;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-@Table(name = "MOVIES")
+@Table(name = "movie")
 @Data
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long movieId;
+    private Long id;
 
-    @Column(name = "movie_name")
-    @NonNull
     private String movieName;
 
-    @Column(name = "release_date")
-    @NonNull
     private Timestamp releaseDate;
 
-    @NonNull
-    @OneToOne
-    @JoinColumn(name = "actor_id")
-    private Actor actor;
+    @ManyToMany(mappedBy = "movies")
+    private List<Actor> actors;
 
-    @NonNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "director_id")
     private Director director;
 }

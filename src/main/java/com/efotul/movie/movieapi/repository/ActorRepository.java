@@ -4,9 +4,10 @@ import com.efotul.movie.movieapi.entity.Actor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface ActorCrudRepository extends CrudRepository<Actor, Long> {
+public interface ActorRepository extends CrudRepository<Actor, Long> {
 
-    Actor save(Actor actor);
-
+    Optional<Actor> findActorByActorName(String actorName);
 }
