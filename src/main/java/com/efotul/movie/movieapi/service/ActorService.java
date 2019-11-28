@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,7 +18,7 @@ public class ActorService {
     private final ActorRepository actorRepository;
 
     public void addActor(Actor actor) {
-        Actor savedActor = actorRepository.save(actor);
+        actorRepository.save(actor);
     }
 
     public void delete(Long id) {
@@ -25,5 +27,16 @@ public class ActorService {
 
     public Optional<Actor> get(Long id) {
         return actorRepository.findById(id);
+    }
+
+    public List<Actor> getAll() {
+        Iterable<Actor> actorIterable = actorRepository.findAll();
+        return transform(actorIterable);
+    }
+
+    private List<Actor> transform(Iterable<Actor> actorIterable) {
+        List<Actor> actors = new ArrayList<>();
+        actorIterable.forEach(actors::add);
+        return actors;
     }
 }

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class ActorRestTest {
+class ActorRestTest {
 
     @Autowired
     private ActorService actorService;
@@ -27,7 +27,7 @@ public class ActorRestTest {
     private ActorRepository actorRepository;
 
     @Test
-    public void createActorTest() {
+    void createActorTest() {
         Actor actor = new Actor();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
@@ -40,7 +40,7 @@ public class ActorRestTest {
     }
 
     @Test
-    public void getActorTest() {
+    void getActorTest() {
         Actor actor = new Actor();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
@@ -57,7 +57,7 @@ public class ActorRestTest {
     }
 
     @Test
-    public void deleteActorTest() {
+    void deleteActorTest() {
         Actor actor = new Actor();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);

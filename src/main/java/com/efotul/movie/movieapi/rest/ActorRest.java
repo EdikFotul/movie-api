@@ -5,11 +5,12 @@ import com.efotul.movie.movieapi.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/actor")
+@RequestMapping("/actors")
 public class ActorRest {
 
     private final ActorService actorService;
@@ -27,5 +28,10 @@ public class ActorRest {
     @GetMapping("{id}")
     public Optional<Actor> get(@PathVariable Long id) {
         return actorService.get(id);
+    }
+
+    @GetMapping
+    public List<Actor> getAll() {
+        return actorService.getAll();
     }
 }
