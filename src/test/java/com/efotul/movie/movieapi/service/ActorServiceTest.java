@@ -1,8 +1,7 @@
-package com.efotul.movie.movieapi.rest;
+package com.efotul.movie.movieapi.service;
 
 import com.efotul.movie.movieapi.entity.Actor;
 import com.efotul.movie.movieapi.repository.ActorRepository;
-import com.efotul.movie.movieapi.service.ActorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,12 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ActorRestTest {
+class ActorServiceTest {
 
     @Autowired
     private ActorService actorService;
@@ -52,8 +51,7 @@ class ActorRestTest {
 
         Long id = actorFromRepository.get().getId();
 
-        assertTrue(actorService.get(id).isPresent());
-        assertThat(actor.getActorName()).isEqualTo(actorService.get(id).get().getActorName());
+        assertThat(actor.getActorName()).isEqualTo(actorService.get(id).getActorName());
     }
 
     @Test
@@ -70,6 +68,6 @@ class ActorRestTest {
         Long id = actorFromRepository.get().getId();
         actorService.delete(id);
 
-        assertFalse(actorService.get(id).isPresent());
+        assertNull(actorService.get(id));
     }
 }

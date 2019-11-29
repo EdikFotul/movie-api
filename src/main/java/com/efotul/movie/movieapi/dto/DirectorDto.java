@@ -5,10 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ActorDto {
+public class DirectorDto {
 
     private Long id;
-    private String actorName;
-    private Double experience;
+    private String directorName;
     private List<String> movies;
 }

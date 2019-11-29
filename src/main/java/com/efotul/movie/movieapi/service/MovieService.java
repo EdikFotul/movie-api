@@ -1,5 +1,7 @@
 package com.efotul.movie.movieapi.service;
 
+import com.efotul.movie.movieapi.dto.MovieDto;
+import com.efotul.movie.movieapi.entity.Actor;
 import com.efotul.movie.movieapi.entity.Movie;
 import com.efotul.movie.movieapi.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,18 +28,29 @@ public class MovieService {
         movieRepository.deleteById(id);
     }
 
-    public Optional<Movie> get(Long id) {
-        return movieRepository.findById(id);
+    public MovieDto get(Long id) {
+        Optional<Movie> actor = movieRepository.findById(id);
+        return actor.map(this::transformMovieToMovieDto).orElse(null);
     }
 
-    public List<Movie> getAll() {
+    public List<MovieDto> getAll() {
         Iterable<Movie> movieIterable = movieRepository.findAll();
-        return transform(movieIterable);
+        return transformIterableToList(movieIterable);
     }
 
-    private List<Movie> transform(Iterable<Movie> movieIterable) {
+    private List<MovieDto> transformIterableToList(Iterable<Movie> movieIterable) {
         List<Movie> movies = new ArrayList<>();
         movieIterable.forEach(movies::add);
-        return movies;
+        return movies.stream().map(this::transformMovieToMovieDto).collect(Collectors.toList());
+    }
+
+    private MovieDto transformMovieToMovieDto(Movie movie) {
+        MovieDto movieDto = new MovieDto();
+        movieDto.setId(movie.getId());
+        movieDto.setMovieName(movie.getMovieName());
+        movieDto.setReleaseDate(movie.getReleaseDate());
+        movieDto.setActors(movie.getActors().stream().map(Actor::getActorName).collect(Collectors.toList()));
+        movieDto.setDirector(movie.getDirector().getDirectorName());
+        return movieDto;
     }
 }

@@ -1,13 +1,13 @@
 package com.efotul.movie.movieapi.rest;
 
 
+import com.efotul.movie.movieapi.dto.DirectorDto;
 import com.efotul.movie.movieapi.entity.Director;
 import com.efotul.movie.movieapi.service.DirectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,12 +27,12 @@ public class DirectorRest {
     }
 
     @GetMapping("/{id}")
-    public Optional<Director> get(@PathVariable Long id) {
+    public DirectorDto get(@PathVariable Long id) {
         return directorService.get(id);
     }
 
     @GetMapping
-    public List<Director> getAll() {
+    public List<DirectorDto> getAll() {
         return directorService.getAll();
     }
 }

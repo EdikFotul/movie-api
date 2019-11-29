@@ -1,12 +1,12 @@
 package com.efotul.movie.movieapi.rest;
 
+import com.efotul.movie.movieapi.dto.ActorDto;
 import com.efotul.movie.movieapi.entity.Actor;
 import com.efotul.movie.movieapi.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,18 +20,18 @@ public class ActorRest {
         actorService.addActor(actor);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         actorService.delete(id);
     }
 
-    @GetMapping("{id}")
-    public Optional<Actor> get(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ActorDto get(@PathVariable Long id) {
         return actorService.get(id);
     }
 
     @GetMapping
-    public List<Actor> getAll() {
+    public List<ActorDto> getAll() {
         return actorService.getAll();
     }
 }
