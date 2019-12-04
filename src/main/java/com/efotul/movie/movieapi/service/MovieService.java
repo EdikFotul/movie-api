@@ -53,7 +53,10 @@ public class MovieService {
     }
 
     public List<MovieDto> getByCondition(Long years, Double experience) {
-        Timestamp untilDate = Timestamp.valueOf(LocalDateTime.now().minusYears(years));
+        Timestamp untilDate = null;
+        if (years != null) {
+            untilDate = Timestamp.valueOf(LocalDateTime.now().minusYears(years));
+        }
         Iterable<Movie> movieIterable = movieRepositoryImproved.findByReleaseDateAndAvgActorsExperience(untilDate, experience);
         return transformIterableToList(movieIterable);
     }

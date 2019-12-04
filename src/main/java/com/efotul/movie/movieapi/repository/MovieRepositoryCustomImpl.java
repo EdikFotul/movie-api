@@ -20,7 +20,6 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
         CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
 
         Root<Movie> movie = cq.from(Movie.class);
-        Join<Actor, Movie> actors = movie.join("actors");
 
         Subquery<Long> subQuery = cq.subquery(Long.class);
         Root<Actor> actor = subQuery.from(Actor.class);
@@ -29,8 +28,19 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
         Predicate releaseDatePredicate = cb.greaterThanOrEqualTo(movie.get("releaseDate"), releaseDate);
         Predicate avgExperiencePredicate = cb.greaterThanOrEqualTo(cb.avg(actor.get("experience")), avgExperience);
 
-        subQuery.select(movies.get("id")).groupBy(movies.get("id")).having(avgExperiencePredicate);
-        cq.select(movie).where(releaseDatePredicate, movie.get("id").in(subQuery)).groupBy(movie.get("id"));
+        if (releaseDate != null) {
+            cq.select(movie).where(releaseDatePredicate).groupBy(movie.get("id"));
+        }
+
+        if (avgExperience != null) {
+            subQuery.select(movies.get("id")).groupBy(movies.get("id")).having(avgExperiencePredicate);
+            cq.select(movie).where(movie.get("id").in(subQuery)).groupBy(movie.get("id"));
+        }
+
+        if (avgExperience != null && releaseDate != null) {
+            subQuery.select(movies.get("id")).groupBy(movies.get("id")).having(avgExperiencePredicate);
+            cq.select(movie).where(releaseDatePredicate, movie.get("id").in(subQuery)).groupBy(movie.get("id"));
+        }
 
         TypedQuery<Movie> query = em.createQuery(cq);
         return query.getResultList();
