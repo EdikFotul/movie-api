@@ -2,9 +2,10 @@ package com.efotul.movie.movieapi.service;
 
 import com.efotul.movie.movieapi.dto.ActorDto;
 import com.efotul.movie.movieapi.entity.Actor;
-import com.efotul.movie.movieapi.entity.Movie;
+import com.efotul.movie.movieapi.mapper.ActorActorDtoMapper;
 import com.efotul.movie.movieapi.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,11 @@ public class ActorService {
 
     private final ActorRepository actorRepository;
 
-    public void addActor(Actor actor) {
-        actorRepository.save(actor);
+    private ActorActorDtoMapper actorMapper = Mappers.getMapper(ActorActorDtoMapper.class);
+
+    public void addActor(ActorDto actorDto) {
+        Actor actorEntity = actorMapper.actorDtoToActor(actorDto);
+        actorRepository.save(actorEntity);
     }
 
     public void delete(Long id) {
@@ -30,7 +34,7 @@ public class ActorService {
 
     public ActorDto get(Long id) {
         Optional<Actor> actor = actorRepository.findById(id);
-        return actor.map(this::transformActorToActorDto).orElse(null);
+        return actor.map(actorMapper::actorToActorDto).orElse(null);
     }
 
     public List<ActorDto> getAll() {
@@ -41,15 +45,6 @@ public class ActorService {
     private List<ActorDto> transformIterableToList(Iterable<Actor> actorIterable) {
         List<Actor> actors = new ArrayList<>();
         actorIterable.forEach(actors::add);
-        return actors.stream().map(this::transformActorToActorDto).collect(Collectors.toList());
-    }
-
-    private ActorDto transformActorToActorDto(Actor actor) {
-        ActorDto actorDto = new ActorDto();
-        actorDto.setId(actor.getId());
-        actorDto.setActorName(actor.getActorName());
-        actorDto.setExperience(actor.getExperience());
-        actorDto.setMovies(actor.getMovies().stream().map(Movie::getMovieName).collect(Collectors.toList()));
-        return actorDto;
+        return actors.stream().map(actorMapper::actorToActorDto).collect(Collectors.toList());
     }
 }

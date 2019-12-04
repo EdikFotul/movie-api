@@ -1,5 +1,6 @@
 package com.efotul.movie.movieapi.service;
 
+import com.efotul.movie.movieapi.dto.ActorDto;
 import com.efotul.movie.movieapi.entity.Actor;
 import com.efotul.movie.movieapi.repository.ActorRepository;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class ActorServiceTest {
 
     @Test
     void createActorTest() {
-        Actor actor = new Actor();
+        ActorDto actor = new ActorDto();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 
@@ -40,7 +41,7 @@ class ActorServiceTest {
 
     @Test
     void getActorTest() {
-        Actor actor = new Actor();
+        ActorDto actor = new ActorDto();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 
@@ -56,7 +57,7 @@ class ActorServiceTest {
 
     @Test
     void deleteActorTest() {
-        Actor actor = new Actor();
+        ActorDto actor = new ActorDto();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 

@@ -1,7 +1,6 @@
 package com.efotul.movie.movieapi.rest;
 
 import com.efotul.movie.movieapi.dto.MovieDto;
-import com.efotul.movie.movieapi.entity.Movie;
 import com.efotul.movie.movieapi.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class MovieRest {
     private final MovieService movieService;
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody Movie movie) {
+    public void saveOrUpdate(@RequestBody MovieDto movie) {
         movieService.addOrUpdate(movie);
     }
 
@@ -34,5 +33,10 @@ public class MovieRest {
     @GetMapping
     public List<MovieDto> getAll() {
         return movieService.getAll();
+    }
+
+    @GetMapping("/filter")
+    public List<MovieDto> getAll(@RequestParam Long years, @RequestParam Double experience){
+        return movieService.getByCondition(years, experience);
     }
 }

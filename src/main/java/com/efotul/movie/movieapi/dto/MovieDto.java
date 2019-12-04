@@ -11,6 +11,6 @@ public class MovieDto {
     private Long id;
     private String movieName;
     private Timestamp releaseDate;
-    private List<String> actors;
-    private String director;
+    private List<ActorDto> actors;
+    private DirectorDto director;
 }

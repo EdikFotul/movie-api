@@ -2,7 +2,6 @@ package com.efotul.movie.movieapi.rest;
 
 
 import com.efotul.movie.movieapi.dto.DirectorDto;
-import com.efotul.movie.movieapi.entity.Director;
 import com.efotul.movie.movieapi.service.DirectorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ public class DirectorRest {
     private final DirectorService directorService;
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody Director director) {
+    public void saveOrUpdate(@RequestBody DirectorDto director) {
         directorService.addOrUpdate(director);
     }
 
