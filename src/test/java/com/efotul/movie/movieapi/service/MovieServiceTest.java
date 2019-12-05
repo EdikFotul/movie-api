@@ -16,14 +16,14 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@Transactional
-@Rollback
 class MovieServiceTest extends IntegrationTestImpl {
 
     @Autowired
     private MovieService movieService;
 
     @Test
+    @Transactional
+    @Rollback
     void getMoviesByCondition() {
         MovieModel movieModel = new MovieModel();
         movieModel.setReleaseDate(Timestamp.valueOf(LocalDateTime.now().minusYears(10).plusHours(2)));
