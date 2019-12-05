@@ -2,8 +2,11 @@ package com.efotul.movie.movieapi.service;
 
 import com.efotul.movie.movieapi.dto.ActorDto;
 import com.efotul.movie.movieapi.entity.Actor;
-import com.efotul.movie.movieapi.mapper.ActorActorDtoMapper;
+import com.efotul.movie.movieapi.entity.Movie;
+import com.efotul.movie.movieapi.mapper.ActorMapper;
+import com.efotul.movie.movieapi.model.ActorModel;
 import com.efotul.movie.movieapi.repository.ActorRepository;
+import com.efotul.movie.movieapi.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,21 @@ public class ActorService {
 
     private final ActorRepository actorRepository;
 
-    private ActorActorDtoMapper actorMapper = Mappers.getMapper(ActorActorDtoMapper.class);
+    private final MovieRepository movieRepository;
 
-    public void addActor(ActorDto actorDto) {
-        Actor actorEntity = actorMapper.actorDtoToActor(actorDto);
+    private ActorMapper actorMapper = Mappers.getMapper(ActorMapper.class);
+
+    public void addActor(ActorModel actorModel) {
+        Actor actorEntity = actorMapper.actorModelToActor(actorModel);
+        if (actorModel.getMoviesId() != null){
+            List<Movie> movies = new ArrayList<>();
+            for (Long id : actorModel.getMoviesId()) {
+                Movie movie = movieRepository.getOne(id);
+                movie.getActors().add(actorEntity);
+                movies.add(movie);
+            }
+            actorEntity.setMovies(movies);
+        }
         actorRepository.save(actorEntity);
     }
 

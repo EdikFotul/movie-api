@@ -19,8 +19,8 @@ VALUES (10, 'Leonardo Dicaprio10', 10),
        (21, 'Leonardo Dicaprio21', 11),
        (22, 'Leonardo Dicaprio22', 10),
        (23, 'Leonardo Dicaprio23', 15),
-       (24, 'Leonardo Dicaprio24', 7),
-       (25, 'Leonardo Dicaprio25', 4);
+       (24, 'Leonardo Dicaprio24', 1000),
+       (25, 'Leonardo Dicaprio25', 1000);
 
 INSERT INTO movie(id, movie_name, release_date, director_id)
 VALUES (10, 'Gost Basters10', '2012-11-01 12:08:17.320053-03', 5),

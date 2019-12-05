@@ -18,7 +18,6 @@ public class Actor {
 
     private Double experience;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movie_actor")
+    @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 }

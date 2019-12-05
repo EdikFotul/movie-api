@@ -4,6 +4,7 @@ import com.efotul.movie.movieapi.dto.DirectorDto;
 import com.efotul.movie.movieapi.dto.MovieDto;
 import com.efotul.movie.movieapi.entity.Director;
 import com.efotul.movie.movieapi.entity.Movie;
+import com.efotul.movie.movieapi.model.DirectorModel;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,4 +26,7 @@ public interface DirectorMapper {
     @Mapping(target = "actors", ignore = true)
     @Mapping(target = "director", ignore = true)
     MovieDto mapWithoutActors(Movie movie);
+
+    @Mapping(target = "movies", ignore = true)
+    Director directorModelToDirector(DirectorModel directorModel);
 }

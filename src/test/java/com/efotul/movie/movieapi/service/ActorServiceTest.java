@@ -1,13 +1,13 @@
 package com.efotul.movie.movieapi.service;
 
-import com.efotul.movie.movieapi.dto.ActorDto;
+import com.efotul.movie.movieapi.IntegrationTestImpl;
 import com.efotul.movie.movieapi.entity.Actor;
+import com.efotul.movie.movieapi.model.ActorModel;
 import com.efotul.movie.movieapi.repository.ActorRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -16,9 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-class ActorServiceTest {
+
+@Transactional
+@Rollback
+class ActorServiceTest extends IntegrationTestImpl {
 
     @Autowired
     private ActorService actorService;
@@ -28,7 +29,7 @@ class ActorServiceTest {
 
     @Test
     void createActorTest() {
-        ActorDto actor = new ActorDto();
+        ActorModel actor = new ActorModel();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 
@@ -41,7 +42,7 @@ class ActorServiceTest {
 
     @Test
     void getActorTest() {
-        ActorDto actor = new ActorDto();
+        ActorModel actor = new ActorModel();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 
@@ -57,7 +58,7 @@ class ActorServiceTest {
 
     @Test
     void deleteActorTest() {
-        ActorDto actor = new ActorDto();
+        ActorModel actor = new ActorModel();
         actor.setActorName(LocalDateTime.now().toString());
         actor.setExperience(4D);
 

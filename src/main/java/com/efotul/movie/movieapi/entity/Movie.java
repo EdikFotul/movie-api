@@ -19,10 +19,15 @@ public class Movie {
 
     private Timestamp releaseDate;
 
-    @ManyToMany(mappedBy = "movies")
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "movie_actor")
     private List<Actor> actors;
 
-    @ManyToOne
+    @ManyToOne(cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+    })
     @JoinColumn(name = "director_id")
     private Director director;
 }

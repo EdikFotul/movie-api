@@ -1,6 +1,7 @@
 package com.efotul.movie.movieapi.rest;
 
 import com.efotul.movie.movieapi.dto.ActorDto;
+import com.efotul.movie.movieapi.model.ActorModel;
 import com.efotul.movie.movieapi.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class ActorRest {
     private final ActorService actorService;
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody ActorDto actor) {
+    public void saveOrUpdate(@RequestBody ActorModel actor) {
         actorService.addActor(actor);
     }
 

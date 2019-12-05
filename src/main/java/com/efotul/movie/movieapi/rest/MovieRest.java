@@ -1,6 +1,7 @@
 package com.efotul.movie.movieapi.rest;
 
 import com.efotul.movie.movieapi.dto.MovieDto;
+import com.efotul.movie.movieapi.model.MovieModel;
 import com.efotul.movie.movieapi.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,13 @@ public class MovieRest {
     private final MovieService movieService;
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody MovieDto movie) {
-        movieService.addOrUpdate(movie);
+    public void saveOrUpdate(@RequestBody MovieModel movie) {
+        movieService.saveOrUpdate(movie);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         movieService.delete(id);
-
     }
 
     @GetMapping("/{id}")
