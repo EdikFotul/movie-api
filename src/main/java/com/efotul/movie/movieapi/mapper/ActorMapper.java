@@ -1,8 +1,10 @@
 package com.efotul.movie.movieapi.mapper;
 
 import com.efotul.movie.movieapi.dto.ActorDto;
+import com.efotul.movie.movieapi.dto.DirectorDto;
 import com.efotul.movie.movieapi.dto.MovieDto;
 import com.efotul.movie.movieapi.entity.Actor;
+import com.efotul.movie.movieapi.entity.Director;
 import com.efotul.movie.movieapi.entity.Movie;
 import com.efotul.movie.movieapi.model.ActorModel;
 import org.mapstruct.IterableMapping;
@@ -25,6 +27,9 @@ public interface ActorMapper {
     @Named(value = "mapWithoutActors")
     @Mapping(target = "actors", ignore = true)
     MovieDto mapWithoutActors(Movie movie);
+
+    @Mapping(target = "movies", ignore = true)
+    DirectorDto directorToDirectorDto(Director director);
 
 
     @Mapping(target = "movies", ignore = true)

@@ -1,11 +1,13 @@
 package com.efotul.movie.movieapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
 
     private Long id;

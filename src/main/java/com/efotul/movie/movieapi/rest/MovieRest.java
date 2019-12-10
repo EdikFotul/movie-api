@@ -36,7 +36,7 @@ public class MovieRest {
     }
 
     @GetMapping("/filter")
-    public List<MovieDto> getByCondition(@RequestParam Long years, @RequestParam Double experience){
+    public List<MovieDto> getByCondition(@RequestParam Long years, @RequestParam Double experience) {
         return movieService.getByCondition(years, experience);
     }
 }

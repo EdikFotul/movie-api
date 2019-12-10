@@ -1,19 +1,17 @@
-create table if not exists actor
+create table actor
 (
     id         bigint(20) auto_increment primary key,
     actor_name varchar(255) null,
     experience double       null
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+);
 
-create table if not exists director
+create table  director
 (
     id            bigint(20) auto_increment primary key,
     director_name varchar(255) null
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+);
 
-create table if not exists movie
+create table  movie
 (
     id           bigint(20) auto_increment primary key,
     movie_name   varchar(255) null,
@@ -22,10 +20,9 @@ create table if not exists movie
     constraint fk_movie_to_director
         foreign key (director_id) references director (id)
             ON DELETE CASCADE
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+);
 
-create table if not exists movie_actor
+create table  movie_actor
 (
     actors_id bigint(20) not null,
     movies_id bigint(20) not null,
@@ -36,6 +33,4 @@ create table if not exists movie_actor
         foreign key (movies_id) references movie (id)
             ON DELETE CASCADE
 
-)
-    ENGINE = InnoDB
-    DEFAULT CHARSET = utf8;
+);

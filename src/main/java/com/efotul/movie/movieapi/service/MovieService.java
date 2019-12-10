@@ -36,9 +36,9 @@ public class MovieService {
 
     public void saveOrUpdate(MovieModel movieModel) {
         Movie movie = movieMapper.movieModelToMovie(movieModel);
-        if (movieModel.getActorsId() != null){
+        if (movieModel.getActorsId() != null) {
             List<Actor> actors = new ArrayList<>();
-            for (Long id: movieModel.getActorsId()) {
+            for (Long id : movieModel.getActorsId()) {
                 Actor actor = actorRepository.getOne(id);
                 actor.getMovies().add(movie);
                 actors.add(actor);
@@ -46,7 +46,7 @@ public class MovieService {
             movie.setActors(actors);
         }
 
-        if (movieModel.getDirectorId() != null){
+        if (movieModel.getDirectorId() != null) {
             Director director = directorRepository.getOne(movieModel.getDirectorId());
             movie.setDirector(director);
         }
