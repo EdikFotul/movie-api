@@ -5,11 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class ExcelRest {
     private final ExcelService excelService;
 
     @GetMapping("/download")
-    public ResponseEntity<InputStreamResource> excelMoviesAndItsActors() throws IOException {
+    public ResponseEntity<InputStreamResource> moviesAndActorsToExcel() throws IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=moviesAndActors.xlsx");
 
@@ -27,5 +28,11 @@ public class ExcelRest {
                 .ok()
                 .headers(headers)
                 .body(new InputStreamResource(excelService.excelMoviesAndActorsReport()));
+    }
+
+    @PostMapping("/upload")
+    public void excelToEntities(@RequestParam MultipartFile file) throws IOException {
+        InputStream inputStream = new BufferedInputStream(file.getInputStream());
+        excelService.excelToEntity(inputStream);
     }
 }
