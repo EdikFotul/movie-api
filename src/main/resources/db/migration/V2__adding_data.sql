@@ -16,15 +16,15 @@ VALUES ('Leonardo Dicaprio1', 1),
        ('Leonardo Dicaprio9', 1);
 
 INSERT INTO movie(movie_name, release_date, director_id)
-VALUES ('Gost Basters1', '2012-11-01 12:08:17.320053-03', 1),
-       ('Gost Basters2', '2013-07-24 12:08:17.320053-03', 1),
-       ('Gost Basters3', '2014-04-22 12:08:17.320053-03', 2),
-       ('Gost Basters4', '2015-01-15 12:08:17.320053-03', 2),
-       ('Gost Basters5', '2016-02-14 12:08:17.320053-03', 2),
-       ('Gost Basters6', '2013-01-20 12:08:17.320053-03', 3),
-       ('Gost Basters7', '2010-03-03 12:08:17.320053-03', 3),
-       ('Gost Basters8', '2009-06-13 12:08:17.320053-03', 3),
-       ('Gost Basters9', '2006-11-11 12:08:17.320053-03', 3);
+VALUES ('Gost Basters1', '2012-11-01', 1),
+       ('Gost Basters2', '2013-07-24', 1),
+       ('Gost Basters3', '2014-04-22', 2),
+       ('Gost Basters4', '2015-01-15', 2),
+       ('Gost Basters5', '2016-02-14', 2),
+       ('Gost Basters6', '2013-01-20', 3),
+       ('Gost Basters7', '2010-03-03', 3),
+       ('Gost Basters8', '2009-06-13', 3),
+       ('Gost Basters9', '2006-11-11', 3);
 
 INSERT INTO movie_actor(actors_id, movies_id)
 VALUES (1,1),

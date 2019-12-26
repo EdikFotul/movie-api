@@ -2,8 +2,8 @@ package com.efotul.movie.movieapi.excel;
 
 import com.efotul.movie.movieapi.dto.ActorDto;
 import com.efotul.movie.movieapi.dto.MovieDto;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
@@ -17,7 +17,7 @@ public class MoviesAndActorsExcelGenerator {
 
     public ByteArrayInputStream moviesAndActorsToExcel(List<MovieDto> movieDtoList, List<ActorDto> actorDtoList) throws IOException {
         try (
-                Workbook workbook = new HSSFWorkbook();
+                Workbook workbook = new XSSFWorkbook();
                 ByteArrayOutputStream out = new ByteArrayOutputStream()
         ) {
             createMovieSheet(workbook, movieDtoList);

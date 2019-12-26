@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
@@ -15,7 +15,7 @@ public class MovieRepositoryCustomImpl implements MovieRepositoryCustom {
     private final EntityManager em;
 
     @Override
-    public Iterable<Movie> findByReleaseDateAndAvgActorsExperience(Timestamp releaseDate, Double avgExperience) {
+    public Iterable<Movie> findByReleaseDateAndAvgActorsExperience(LocalDateTime releaseDate, Double avgExperience) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
 

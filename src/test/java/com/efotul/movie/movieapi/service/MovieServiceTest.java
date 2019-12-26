@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ class MovieServiceTest extends IntegrationTestImpl {
     @Rollback
     void getMoviesByCondition() {
         MovieModel movieModel = new MovieModel();
-        movieModel.setReleaseDate(Timestamp.valueOf(LocalDateTime.now().minusYears(10).plusHours(2)));
+        movieModel.setReleaseDate(LocalDateTime.now().minusYears(10).plusHours(2));
         movieModel.setMovieName("Test" + LocalDateTime.now().toString());
         List<Long> actorsId = new ArrayList<>();
         actorsId.add(25L);

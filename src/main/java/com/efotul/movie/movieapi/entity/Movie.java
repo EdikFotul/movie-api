@@ -3,7 +3,7 @@ package com.efotul.movie.movieapi.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,7 +17,7 @@ public class Movie {
 
     private String movieName;
 
-    private Timestamp releaseDate;
+    private LocalDateTime releaseDate;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -25,8 +25,8 @@ public class Movie {
     private List<Actor> actors;
 
     @ManyToOne(cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
+            CascadeType.PERSIST,
+            CascadeType.MERGE
     })
     @JoinColumn(name = "director_id")
     private Director director;

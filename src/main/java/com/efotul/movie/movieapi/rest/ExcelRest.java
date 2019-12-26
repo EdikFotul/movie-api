@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,7 +30,6 @@ public class ExcelRest {
 
     @PostMapping("/upload")
     public void excelToEntities(@RequestParam MultipartFile file) throws IOException {
-        InputStream inputStream = new BufferedInputStream(file.getInputStream());
-        excelService.excelToEntity(inputStream);
+        excelService.excelToEntity(file.getInputStream());
     }
 }
